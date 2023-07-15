@@ -1,0 +1,3 @@
+const AUTH = {
+  UNAUTHORIZATION_MESSAGE: "UNAUTH"
+};
