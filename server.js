@@ -26,7 +26,8 @@ app.use(middlewares.loggerMiddleware)
 //burdaki middleware daha sonra token yetkilendirme olduğunda kullanılacak
 
 app.use(`${process.env.APP_PREFIX}${consts.router.AUTH}`, router.authRouter);
-// app.use(`${process.env.APP_PREFIX}${consts.router.PROFILE}`, router.userRouter);
+app.use(`${process.env.APP_PREFIX}${consts.router.PROFILE}`, router.userRouter);
+
 // app.use(`${process.env.APP_PREFIX}${consts.router.GENERAL}`, router.generalRouter);
 // app.use(`${process.env.APP_PREFIX}${consts.router.ZODIAC}`, router.zodiacRouter);
 // app.use(`${process.env.APP_PREFIX}${consts.router.TAROT}`, router.tarotRouter);

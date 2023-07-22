@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const userDal = require("../dal/index");
 const utils = require("../utils/index");
-// const fileService = require("./file.service");
+const fileService = require("./file.service");
 
 exports.createUser = async (req) => {
   try {
@@ -48,6 +48,50 @@ exports.signIn = async (req) => {
   }
 };
 
+exports.getUser = async (req) => {
+  try {
+    const { id } = req.params;
+    const json = await userDal.user.findById(id);
+    console.log(json);
+    if (json) {
+      return json;
+    }
+    return null;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.updateAvatar = async (req, res) => {
+  try {
+    const { id } = req.query;
+    const str = await fileService.uploadImage(req, res);
+    const json = await userDal.user.updateById(id, { avatar: str });
+    return json;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.createPassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+    const _password = utils.helpers.hashToPassword(password);
+    const json = await userDal.user.updateById(id, { password: _password });
+    if (json) {
+      const token = utils.helpers.createToken(json._id, json.name);
+      return {
+        id: json._id,
+        token,
+        _password,
+      };
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 // exports.updateUser = async (req) => {
 //   try {
 //     const { surname, gender, email } = req.body;
@@ -62,51 +106,6 @@ exports.signIn = async (req) => {
 //       email,
 //     });
 //     return json;
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// };
-
-
-// exports.getUser = async (req) => {
-//   try {
-//     const { id } = req.params;
-//     const json = await userDal.user.findById(id);
-//     console.log(json);
-//     if (json) {
-//       return json;
-//     }
-//     return null;
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// };
-
-// exports.updateAvatar = async (req, res) => {
-//   try {
-//     const { id } = req.query;
-//     const str = await fileService.uploadImage(req, res);
-//     const json = await userDal.user.updateById(id, { avatar: str });
-//     return json;
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// };
-
-// exports.createPassword = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { password } = req.body;
-//     const _password = utils.helpers.hashToPassword(password);
-//     const json = await userDal.user.updateById(id, { password: _password });
-//     if (json) {
-//       const token = utils.helpers.createToken(json._id, json.name);
-//       return {
-//         id: json._id,
-//         token,
-//         _password,
-//       };
-//     }
 //   } catch (error) {
 //     throw new Error(error);
 //   }
