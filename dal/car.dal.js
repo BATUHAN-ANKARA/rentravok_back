@@ -10,6 +10,9 @@ const CarDataAccess = {
   async findOne(where) {
     return await Car.findOne(where);
   },
+  async find(where) {
+    return await Car.find(where);
+  },
   async findById(id) {
     return await Car.findById({ _id: id });
   },
