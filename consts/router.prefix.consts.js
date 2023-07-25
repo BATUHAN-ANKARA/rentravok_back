@@ -1,6 +1,8 @@
 const ROUTER_PREFIX = {
     AUTH: 'auth',
-    USER: 'user'
+    USER: 'user',
+    CAR: 'car',
+    RESERVATION: 'reservation'
 }
 
 module.exports = ROUTER_PREFIX

@@ -11,5 +11,5 @@ router.get("/getCarByTransmission/:transmission", controller.carController.getCa
 router.put("/updateCarPrice/:id", controller.carController.updateCarPrice);
 
 module.exports = {
-  user: router
+  car: router
 };
