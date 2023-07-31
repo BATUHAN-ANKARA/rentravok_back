@@ -5,7 +5,7 @@ const fileService = require("./file.service");
 
 exports.createUser = async (req) => {
   try {
-    let { password, email } = req.body;
+    let { password, email, name, surname } = req.body;
     // birthDate = new Date(birthDate);
     // let today = new Date();
     // let age = today.getFullYear() - birthDate.getFullYear();
@@ -21,6 +21,8 @@ exports.createUser = async (req) => {
     const user = new User({
       password: _password,
       email,
+      name,
+      surname,
     });
     const json = await userDal.user.create(user);
     return json;

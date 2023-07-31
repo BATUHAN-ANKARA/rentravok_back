@@ -4,6 +4,8 @@ const Car = require("../models/car.model");
 exports.createReservation = async (req) => {
   try {
     let { userId, carId, startDate, endDate } = req.body;
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
     const car = await Car.findById(carId);
     if (!car) {
       return { error: "Araç bulunamadı." };
@@ -19,6 +21,7 @@ exports.createReservation = async (req) => {
       return { error: "Geçersiz rezervasyon tarihleri." };
     }
     // Rezervasyonu oluşturuyorum
+    console.log(x);
     const reservation = new Reservation({
       user: userId,
       car: carId,
@@ -57,7 +60,7 @@ exports.cancelReservation = async (req) => {
     }
 
     // Rezervasyonu veritabanından siliyorum
-    await reservation.remove();
+    await reservation.deleteOne();
 
     // Araç durumunu rezerve edilebilir olarak güncelliyorum
     const car = await Car.findById(reservation.car);
