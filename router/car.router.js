@@ -8,6 +8,7 @@ router.get("/getCarByBrand/:brand", controller.carController.getCarByBrand);//id
 router.get("/getCarByModel/:model", controller.carController.getCarByModel);
 router.get("/getCarByColor/:color", controller.carController.getCarByColor);
 router.get("/getCarByTransmission/:transmission", controller.carController.getCarByTransmission);
+router.get("/getAvailableCars", controller.carController.getAvailableCars);
 router.put("/updateCarPrice/:id", controller.carController.updateCarPrice);
 
 module.exports = {

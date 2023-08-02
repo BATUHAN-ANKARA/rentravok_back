@@ -100,3 +100,12 @@ exports.updateCarPrice = async (req) => {
     throw new Error(error);
   }
 };
+
+exports.getAvailableCars = async () => {
+  try {
+    const availableCars = await carDal.car.find({ isReserved: false });
+    return availableCars;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

@@ -21,7 +21,6 @@ exports.createReservation = async (req) => {
       return { error: "Geçersiz rezervasyon tarihleri." };
     }
     // Rezervasyonu oluşturuyorum
-    console.log(x);
     const reservation = new Reservation({
       user: userId,
       car: carId,
